@@ -10,6 +10,7 @@
         public List<Statistics>? Stats { get; set; }
         public Sprite? Sprites { get; set; }
         public List<Type>? Types { get; set; }
+        public List<Move>? Moves { get; set; }
     }
 
     class Statistics
