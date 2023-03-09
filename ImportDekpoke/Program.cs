@@ -5,7 +5,7 @@ namespace ImportDekpoke
 {
     internal class Program
     {
-        async static Task Main()
+        static void Main()
         {
 
             int userInput = 0;
@@ -17,7 +17,7 @@ namespace ImportDekpoke
                 switch (userInput)
                 {
                     case 1:
-                        await Request.GetPokemon();
+                        Request.GetPokemon();
                         break;
                     case 2:
                         Console.WriteLine(2);
