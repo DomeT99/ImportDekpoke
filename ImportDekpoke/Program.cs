@@ -1,10 +1,11 @@
-﻿using ImportDekpoke.Utils;
+﻿using ImportDekpoke.HttpRequest;
+using ImportDekpoke.Utils;
 
 namespace ImportDekpoke
 {
     internal class Program
     {
-        static void Main()
+        async static Task Main()
         {
 
             int userInput = 0;
@@ -16,7 +17,7 @@ namespace ImportDekpoke
                 switch (userInput)
                 {
                     case 1:
-                        Console.WriteLine(1);
+                        await Request.GetPokemon();
                         break;
                     case 2:
                         Console.WriteLine(2);
