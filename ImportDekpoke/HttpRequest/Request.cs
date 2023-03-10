@@ -13,13 +13,13 @@ namespace ImportDekpoke.HttpRequest
         {
             try
             {
-                Call call = new(Url + "/pokemon/?limit=2");
+                RestResponse? response = await Call.Get(Url + "/pokemon/?limit=2");
 
-                RestResponse? result = await call.Get();
-
-                if (result.Content is not null && result.IsSuccessful)
+                if (response.Content is not null && response.IsSuccessful)
                 {
-                    PokemonApi? jsonPokeApi = JsonConvert.DeserializeObject<PokemonApi>(result.Content);
+                    PokemonApi? jsonPokeApi = JsonConvert.DeserializeObject<PokemonApi>(response.Content);
+                   
+                    Converter.ToJsonPokemon(jsonPokeApi?.Results!);
                 }
 
             }

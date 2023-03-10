@@ -4,20 +4,15 @@ namespace ImportDekpoke.Utils
 {
     class Call
     {
-        private string Url { get; set; }
-        public Call(string _url)
-        {
-            Url = _url;
-        }
 
-        public async Task<RestResponse> Get()
+        public static async Task<RestResponse> Get(string url)
         {
             try
             {
                 using RestClient client = new();
 
 
-                RestRequest request = new(Url, Method.Get);
+                RestRequest request = new(url, Method.Get);
 
                 RestResponse response = await client.GetAsync(request);
 
