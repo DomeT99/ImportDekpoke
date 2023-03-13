@@ -7,7 +7,7 @@ namespace ImportDekpoke.Utils
 {
     class Converter
     {
-        public async static void ToJsonPokemon(List<Result> jsonPokeApi)
+        public async static void ToJsonPokemon(List<Result> jsonPokeApi, string folderPath)
         {
             List<Pokemon> pokemons = new();
             RestResponse response = new();
@@ -15,6 +15,7 @@ namespace ImportDekpoke.Utils
 
             try
             {
+
                 foreach (Result? counterPokeApi in jsonPokeApi)
                 {
 
@@ -74,19 +75,12 @@ namespace ImportDekpoke.Utils
                     pokemons.Add(pokemon);
                 }
 
-                SaveJson(pokemons, "");
+                Utility.SaveJson(pokemons, folderPath, "pokemon");
             }
             catch (Exception)
             {
                 throw;
             }
-        }
-
-        private static void SaveJson<T>(List<T> jsonList, string path)
-        {
-            string json = JsonConvert.SerializeObject(jsonList.ToList());
-            File.WriteAllText(path, json);
-
         }
     }
 }

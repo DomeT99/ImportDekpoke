@@ -4,20 +4,28 @@
     {
         public static string[] _voices = { "1. Import Pokemon", "2. Import Moves", "3. Import Items", "4. Exit" };
 
-        public static int Choose()
+        public static Option Choose()
         {
             Display();
 
-            var result = Console.ReadLine();
+            Option option = new();
+
+            Console.WriteLine("Choose an option ");
+            option.Value = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Specify path to save json ");
+            option.FolderPath = Console.ReadLine();
+
+
             Console.WriteLine();
 
-            return Convert.ToInt32(result);
+            return option;
         }
 
         private static void Display()
         {
             Console.Clear();
-           
+
             Styling();
             Console.WriteLine();
             Console.WriteLine("Choose an option");
@@ -27,7 +35,7 @@
             {
                 Console.WriteLine(_voices[i]);
             }
-            
+
             Console.WriteLine();
         }
 
@@ -37,6 +45,12 @@
             Console.Title = "Import Dekpoke";
             Console.ForegroundColor = ConsoleColor.White;
         }
-    }
 
+
+    }
+    public class Option
+    {
+        public int Value { get; set; }
+        public string? FolderPath { get; set; }
+    }
 }

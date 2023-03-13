@@ -8,16 +8,16 @@ namespace ImportDekpoke
         static void Main()
         {
 
-            int userInput = 0;
+            Option userInput = new();
 
             do
             {
                 userInput = Menu.Choose();
 
-                switch (userInput)
+                switch (userInput.Value)
                 {
                     case 1:
-                        Request.GetPokemon();
+                        Request.GetPokemon(userInput.FolderPath!);
                         break;
                     case 2:
                         Console.WriteLine(2);
@@ -28,7 +28,8 @@ namespace ImportDekpoke
                     case 4:
                         return;
                 }
-            } while (userInput != 4);
+            } while (userInput.Value != 4);
+
         }
 
 
