@@ -25,7 +25,7 @@ namespace ImportDekpoke.Utils
                     return;
             }
         }
-       
+
         private async static void Pokemon(List<Result> jsonPokeApi, string folderPath)
         {
             List<Pokemon> pokemons = new();
@@ -102,7 +102,7 @@ namespace ImportDekpoke.Utils
             }
         }
 
-        private static void Moves(List<Result> jsonMoveApi, string folderPath)
+        private async static void Moves(List<Result> jsonMoveApi, string folderPath)
         {
             List<Models.Move> moves = new();
             RestResponse response = new();
@@ -112,9 +112,23 @@ namespace ImportDekpoke.Utils
 
                 foreach (Result? counterMoveApi in jsonMoveApi)
                 {
+
+                    response = await Call.Get(counterMoveApi.Url!);
+
+                    MoveDetails? moveDetails = JsonConvert.DeserializeObject<MoveDetails>(response.Content!);
+
+
+                    TypeMove moveType = new()
+                    {
+                        name = moveDetails!.type.name
+                    };
+
                     Models.Move newMove = new()
                     {
-                        Name = counterMoveApi.Name,
+                        Name = moveDetails!.name,
+                        Power = moveDetails!.power,
+                        Accuracy = moveDetails!.accuracy,
+                        Type = moveType.name,
                     };
 
                     moves.Add(newMove);

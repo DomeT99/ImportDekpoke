@@ -132,7 +132,7 @@
         public List<object> stat_changes { get; set; }
         public SuperContestEffect super_contest_effect { get; set; }
         public Target target { get; set; }
-        public Type type { get; set; }
+        public TypeMove type { get; set; }
     }
 
     public class Super
@@ -152,7 +152,7 @@
         public string url { get; set; }
     }
 
-    public class Type
+    public class TypeMove
     {
         public string name { get; set; }
         public string url { get; set; }
@@ -163,12 +163,4 @@
         public string name { get; set; }
         public string url { get; set; }
     }
-
-    public class VersionGroup
-    {
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-
-
 }
