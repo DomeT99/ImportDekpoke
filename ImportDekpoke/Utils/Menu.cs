@@ -11,7 +11,7 @@
             Option option = new();
 
             Console.WriteLine("Choose an option ");
-            option.Value = Convert.ToInt32(Console.ReadLine());
+            option.Value = (Choise)Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Specify path to save json ");
             option.FolderPath = Console.ReadLine();
@@ -50,7 +50,14 @@
     }
     public class Option
     {
-        public int Value { get; set; }
+        public Choise Value { get; set; }
         public string? FolderPath { get; set; }
+    }
+    public enum Choise
+    {
+        POKEMON = 1,
+        MOVES = 2,
+        ITEMS = 3,
+        EXIT = 4
     }
 }

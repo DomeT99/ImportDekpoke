@@ -25,7 +25,7 @@ namespace ImportDekpoke.HttpRequest
                     {
                         PokemonApi? jsonPokeApi = JsonConvert.DeserializeObject<PokemonApi>(response.Content);
 
-                        Converter.ToJsonPokemon(jsonPokeApi?.Results!, folderPath);
+                        Converter.ToJson(jsonPokeApi?.Results!, folderPath, Choise.POKEMON);
                     }
                 }
                 else
@@ -54,7 +54,7 @@ namespace ImportDekpoke.HttpRequest
                     {
                         MoveApi? jsonMoveApi = JsonConvert.DeserializeObject<MoveApi>(response.Content);
 
-                        Converter.ToJsonMoves(jsonMoveApi?.Results!, folderPath);
+                        Converter.ToJson(jsonMoveApi?.Results!, folderPath, Choise.MOVES);
                     }
                 }
                 else

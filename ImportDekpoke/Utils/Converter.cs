@@ -7,7 +7,26 @@ namespace ImportDekpoke.Utils
 {
     class Converter
     {
-        public async static void ToJsonPokemon(List<Result> jsonPokeApi, string folderPath)
+
+        public static void ToJson(List<Result> json, string folderPath, Choise choise)
+        {
+            switch (choise)
+            {
+                case Choise.POKEMON:
+                    Pokemon(json, folderPath);
+                    break;
+                case Choise.MOVES:
+                    Moves(json, folderPath);
+                    break;
+                case Choise.ITEMS:
+                    Console.WriteLine(3);
+                    break;
+                case Choise.EXIT:
+                    return;
+            }
+        }
+       
+        private async static void Pokemon(List<Result> jsonPokeApi, string folderPath)
         {
             List<Pokemon> pokemons = new();
             RestResponse response = new();
@@ -83,7 +102,7 @@ namespace ImportDekpoke.Utils
             }
         }
 
-        public static void ToJsonMoves(List<Result> jsonMoveApi, string folderPath)
+        private static void Moves(List<Result> jsonMoveApi, string folderPath)
         {
             List<Models.Move> moves = new();
             RestResponse response = new();

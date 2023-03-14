@@ -16,19 +16,19 @@ namespace ImportDekpoke
 
                 switch (userInput.Value)
                 {
-                    case 1:
+                    case Choise.POKEMON:
                         Request.GetPokemon(userInput.FolderPath!);
                         break;
-                    case 2:
+                    case Choise.MOVES:
                         Request.GetMoves(userInput.FolderPath!);
                         break;
-                    case 3:
+                    case Choise.ITEMS:
                         Console.WriteLine(3);
                         break;
-                    case 4:
+                    case Choise.EXIT:
                         return;
                 }
-            } while (userInput.Value != 4);
+            } while (userInput.Value != Choise.EXIT);
 
         }
 
