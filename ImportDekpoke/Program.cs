@@ -20,7 +20,7 @@ namespace ImportDekpoke
                         Request.GetPokemon(userInput.FolderPath!);
                         break;
                     case 2:
-                        Console.WriteLine(2);
+                        Request.GetMoves(userInput.FolderPath!);
                         break;
                     case 3:
                         Console.WriteLine(3);

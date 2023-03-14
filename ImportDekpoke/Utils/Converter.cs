@@ -82,5 +82,31 @@ namespace ImportDekpoke.Utils
                 throw;
             }
         }
+
+        public static void ToJsonMoves(List<Result> jsonMoveApi, string folderPath)
+        {
+            List<Models.Move> moves = new();
+            RestResponse response = new();
+
+            try
+            {
+
+                foreach (Result? counterMoveApi in jsonMoveApi)
+                {
+                    Models.Move newMove = new()
+                    {
+                        Name = counterMoveApi.Name,
+                    };
+
+                    moves.Add(newMove);
+                }
+
+                Utility.SaveJson(moves, folderPath, "moves");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
