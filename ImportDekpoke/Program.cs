@@ -23,7 +23,7 @@ namespace ImportDekpoke
                         Request.GetMoves(userInput.FolderPath!);
                         break;
                     case Choise.ITEMS:
-                        Console.WriteLine(3);
+                        Request.GetItems(userInput.FolderPath!);
                         break;
                     case Choise.EXIT:
                         return;

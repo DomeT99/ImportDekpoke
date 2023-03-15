@@ -94,12 +94,6 @@ namespace ImportDekpoke.Models.APIModels
         public string url { get; set; }
     }
 
-    public class GameIndex
-    {
-        public int game_index { get; set; }
-        public Version version { get; set; }
-    }
-
     public class GenerationI
     {
         [JsonProperty("red-blue")]
@@ -377,11 +371,6 @@ namespace ImportDekpoke.Models.APIModels
         public Version version { get; set; }
     }
 
-    public class VersionGroup
-    {
-        public string name { get; set; }
-        public string url { get; set; }
-    }
 
     public class VersionGroupDetail
     {

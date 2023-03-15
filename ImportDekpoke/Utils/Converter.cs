@@ -19,7 +19,7 @@ namespace ImportDekpoke.Utils
                     Moves(json, folderPath);
                     break;
                 case Choise.ITEMS:
-                    Console.WriteLine(3);
+                    Items(json, folderPath);
                     break;
                 case Choise.EXIT:
                     return;
@@ -135,6 +135,39 @@ namespace ImportDekpoke.Utils
                 }
 
                 Utility.SaveJson(moves, folderPath, "moves");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private async static void Items(List<Result> jsonItemApi, string folderPath)
+        {
+            List<Models.Item> items = new();
+            RestResponse response = new();
+
+            try
+            {
+
+                foreach (Result? counterItemApi in jsonItemApi)
+                {
+
+                    response = await Call.Get(counterItemApi.Url!);
+
+                    ItemDetails? itemDetails = JsonConvert.DeserializeObject<ItemDetails>(response.Content!);
+
+                    Models.Item newItem = new()
+                    {
+                        Name = itemDetails!.name,
+                        Cost = itemDetails!.cost,
+                        Effect = itemDetails!.effect_entries[0].short_effect,
+                        Sprite = itemDetails!.sprites.Default
+                    };
+                    items.Add(newItem);
+                }
+
+                Utility.SaveJson(items, folderPath, "items");
             }
             catch (Exception)
             {

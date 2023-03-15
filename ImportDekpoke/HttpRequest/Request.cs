@@ -67,5 +67,34 @@ namespace ImportDekpoke.HttpRequest
                 throw;
             }
         }
+
+        public async static void GetItems(string folderPath)
+        {
+            RequestParams parameters = new(StaticUrl!, "/item/?limit=2");
+
+
+            try
+            {
+                if (Utility.CheckFolderPath(folderPath))
+                {
+                    RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
+
+                    if (response.Content is not null && response.IsSuccessful)
+                    {
+                        ItemApi? jsonItemApi = JsonConvert.DeserializeObject<ItemApi>(response.Content);
+
+                        Converter.ToJson(jsonItemApi?.Results!, folderPath, Choise.ITEMS);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("The path is invalid!");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
