@@ -1,6 +1,10 @@
 ﻿namespace ImportDekpoke.Models
 {
-    internal class Item
+    class Item
     {
+        public string? Name { get; set; }
+        public int Cost { get; set; }
+        public string? Effect { get; set; }
+        public string? Sprite { get; set; }
     }
 }

@@ -3,17 +3,7 @@
 namespace ImportDekpoke.Models.APIModels
 {
     #region ListPokemon
-    public class Result
-    {
-        public string? Name { get; set; }
-        public string? Url { get; set; }
-    }
-
-    public class PokemonApi
-    {
-        public int Count { get; set; }
-        public List<Result>? Results { get; set; }
-    }
+    public class PokemonApi : Response { }
     #endregion
 
     public class Ability
@@ -337,7 +327,7 @@ namespace ImportDekpoke.Models.APIModels
         public string front_default { get; set; }
         public object front_female { get; set; }
         public string front_shiny { get; set; }
-     
+
         public Other other { get; set; }
         public Versions versions { get; set; }
     }
