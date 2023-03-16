@@ -9,6 +9,7 @@
         }
         public void Turn()
         {
+
             Counter++;
             switch (Counter % 4)
             {
@@ -18,6 +19,7 @@
                 case 3: Console.Write("|"); break;
             }
             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+
         }
     }
 }

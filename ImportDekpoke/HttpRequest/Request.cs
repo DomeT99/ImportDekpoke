@@ -9,33 +9,51 @@ namespace ImportDekpoke.HttpRequest
     class Request
     {
         private static readonly string? StaticUrl = "https://pokeapi.co/api/v2";
+        private static bool IsLoading { get; set; }
 
-        public async static void GetPokemon(string folderPath)
+        public static void GetPokemon(string folderPath)
         {
             RequestParams parameters = new(StaticUrl!, "/pokemon/?limit=2");
+            IsLoading = true;
 
             try
             {
-
-
-                if (Utility.CheckFolderPath(folderPath))
+                Thread loadingThread = new(() =>
                 {
-                    RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
-
-                    if (response.Content is not null && response.IsSuccessful)
+                    Spinner spinner = new();
+                    while (IsLoading)
                     {
-                        PokemonApi? jsonPokeApi = JsonConvert.DeserializeObject<PokemonApi>(response.Content);
-
-                        Converter.ToJson(jsonPokeApi?.Results!, folderPath, Choise.POKEMON);
-
+                        spinner.Turn();
                     }
-                }
-                else
+
+                });
+                Thread requestThread = new(async () =>
                 {
-                    Console.WriteLine("The path is invalid!");
 
-                }
+                    if (Utility.CheckFolderPath(folderPath))
+                    {
+                        RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
 
+                        if (response.Content is not null && response.IsSuccessful)
+                        {
+                            PokemonApi? jsonPokeApi = JsonConvert.DeserializeObject<PokemonApi>(response.Content);
+
+                            Converter.ToJson(jsonPokeApi?.Results!, folderPath, Choise.POKEMON);
+                            IsLoading = false;
+                        }
+                    }
+                    else
+                    {
+                        IsLoading = false;
+                        Console.WriteLine("The path is invalid!");
+                    }
+                });
+
+                loadingThread.Start();
+                requestThread.Start();
+
+                loadingThread.Join();
+                requestThread.Join();
 
             }
             catch (Exception)
@@ -44,28 +62,48 @@ namespace ImportDekpoke.HttpRequest
             }
         }
 
-        public async static void GetMoves(string folderPath)
+        public static void GetMoves(string folderPath)
         {
             RequestParams parameters = new(StaticUrl!, "/move/?limit=2");
-
+            IsLoading = true;
 
             try
             {
-                if (Utility.CheckFolderPath(folderPath))
+                Thread loadingThread = new(() =>
                 {
-                    RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
-
-                    if (response.Content is not null && response.IsSuccessful)
+                    Spinner spinner = new();
+                    while (IsLoading)
                     {
-                        MoveApi? jsonMoveApi = JsonConvert.DeserializeObject<MoveApi>(response.Content);
-
-                        Converter.ToJson(jsonMoveApi?.Results!, folderPath, Choise.MOVES);
+                        spinner.Turn();
                     }
-                }
-                else
+
+                });
+                Thread requestThread = new(async () =>
                 {
-                    Console.WriteLine("The path is invalid!");
-                }
+                    if (Utility.CheckFolderPath(folderPath))
+                    {
+                        RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
+
+                        if (response.Content is not null && response.IsSuccessful)
+                        {
+                            MoveApi? jsonMoveApi = JsonConvert.DeserializeObject<MoveApi>(response.Content);
+
+                            Converter.ToJson(jsonMoveApi?.Results!, folderPath, Choise.MOVES);
+                            IsLoading = false;
+                        }
+                    }
+                    else
+                    {
+                        IsLoading = false;
+                        Console.WriteLine("The path is invalid!");
+                    }
+                });
+
+                loadingThread.Start();
+                requestThread.Start();
+
+                loadingThread.Join();
+                requestThread.Join();
             }
             catch (Exception)
             {
@@ -73,28 +111,49 @@ namespace ImportDekpoke.HttpRequest
             }
         }
 
-        public async static void GetItems(string folderPath)
+        public static void GetItems(string folderPath)
         {
             RequestParams parameters = new(StaticUrl!, "/item/?limit=2");
-
+            IsLoading = true;
 
             try
             {
-                if (Utility.CheckFolderPath(folderPath))
+                Thread loadingThread = new(() =>
                 {
-                    RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
-
-                    if (response.Content is not null && response.IsSuccessful)
+                    Spinner spinner = new();
+                    while (IsLoading)
                     {
-                        ItemApi? jsonItemApi = JsonConvert.DeserializeObject<ItemApi>(response.Content);
-
-                        Converter.ToJson(jsonItemApi?.Results!, folderPath, Choise.ITEMS);
+                        spinner.Turn();
                     }
-                }
-                else
+
+                });
+                Thread requestThread = new(async () =>
                 {
-                    Console.WriteLine("The path is invalid!");
-                }
+                    if (Utility.CheckFolderPath(folderPath))
+                    {
+                        RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
+
+                        if (response.Content is not null && response.IsSuccessful)
+                        {
+                            ItemApi? jsonItemApi = JsonConvert.DeserializeObject<ItemApi>(response.Content);
+
+                            Converter.ToJson(jsonItemApi?.Results!, folderPath, Choise.ITEMS);
+                            IsLoading = false;
+                        }
+                    }
+                    else
+                    {
+                        IsLoading = false;
+                        Console.WriteLine("The path is invalid!");
+                    }
+                });
+
+
+                loadingThread.Start();
+                requestThread.Start();
+
+                loadingThread.Join();
+                requestThread.Join();
             }
             catch (Exception)
             {
