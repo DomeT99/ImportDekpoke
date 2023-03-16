@@ -9,14 +9,15 @@ namespace ImportDekpoke.HttpRequest
     class Request
     {
         private static readonly string? StaticUrl = "https://pokeapi.co/api/v2";
-       
+
         public async static void GetPokemon(string folderPath)
         {
             RequestParams parameters = new(StaticUrl!, "/pokemon/?limit=2");
 
-
             try
             {
+
+
                 if (Utility.CheckFolderPath(folderPath))
                 {
                     RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
@@ -26,12 +27,16 @@ namespace ImportDekpoke.HttpRequest
                         PokemonApi? jsonPokeApi = JsonConvert.DeserializeObject<PokemonApi>(response.Content);
 
                         Converter.ToJson(jsonPokeApi?.Results!, folderPath, Choise.POKEMON);
+
                     }
                 }
                 else
                 {
                     Console.WriteLine("The path is invalid!");
+
                 }
+
+
             }
             catch (Exception)
             {

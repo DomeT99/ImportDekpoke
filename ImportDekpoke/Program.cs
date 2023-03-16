@@ -9,7 +9,6 @@ namespace ImportDekpoke
         {
 
             Option userInput = new();
-
             do
             {
                 userInput = Menu.Choose();
