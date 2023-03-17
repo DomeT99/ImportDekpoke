@@ -1,9 +1,5 @@
 ﻿namespace ImportDekpoke.Models.APIModels
 {
-    #region ListMove
-    public class MoveApi : Response { }
-    #endregion
-
 
 
     public class Ailment

@@ -10,10 +10,10 @@ namespace ImportDekpoke.HttpRequest
     {
         private static readonly string? StaticUrl = "https://pokeapi.co/api/v2";
         private static bool IsLoading { get; set; }
-
-        public static void GetPokemon(string folderPath)
+       
+        public static void GetData(string folderPath, string path, Choise choise)
         {
-            RequestParams parameters = new(StaticUrl!, "/pokemon/?limit=2");
+            RequestParams parameters = new(StaticUrl!, path);
             IsLoading = true;
 
             try
@@ -36,9 +36,10 @@ namespace ImportDekpoke.HttpRequest
 
                         if (response.Content is not null && response.IsSuccessful)
                         {
-                            PokemonApi? jsonPokeApi = JsonConvert.DeserializeObject<PokemonApi>(response.Content);
 
-                            Converter.ToJson(jsonPokeApi?.Results!, folderPath, Choise.POKEMON);
+                            Response? jsonApi = JsonConvert.DeserializeObject<Response>(response.Content);
+
+                            Converter.ToJson(jsonApi?.Results!, folderPath, choise);
                             IsLoading = false;
                         }
                     }
@@ -62,103 +63,5 @@ namespace ImportDekpoke.HttpRequest
             }
         }
 
-        public static void GetMoves(string folderPath)
-        {
-            RequestParams parameters = new(StaticUrl!, "/move/?limit=2");
-            IsLoading = true;
-
-            try
-            {
-                Thread loadingThread = new(() =>
-                {
-                    Spinner spinner = new();
-                    while (IsLoading)
-                    {
-                        spinner.Turn();
-                    }
-
-                });
-                Thread requestThread = new(async () =>
-                {
-                    if (Utility.CheckFolderPath(folderPath))
-                    {
-                        RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
-
-                        if (response.Content is not null && response.IsSuccessful)
-                        {
-                            MoveApi? jsonMoveApi = JsonConvert.DeserializeObject<MoveApi>(response.Content);
-
-                            Converter.ToJson(jsonMoveApi?.Results!, folderPath, Choise.MOVES);
-                            IsLoading = false;
-                        }
-                    }
-                    else
-                    {
-                        IsLoading = false;
-                        Console.WriteLine("The path is invalid!");
-                    }
-                });
-
-                loadingThread.Start();
-                requestThread.Start();
-
-                loadingThread.Join();
-                requestThread.Join();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public static void GetItems(string folderPath)
-        {
-            RequestParams parameters = new(StaticUrl!, "/item/?limit=2");
-            IsLoading = true;
-
-            try
-            {
-                Thread loadingThread = new(() =>
-                {
-                    Spinner spinner = new();
-                    while (IsLoading)
-                    {
-                        spinner.Turn();
-                    }
-
-                });
-                Thread requestThread = new(async () =>
-                {
-                    if (Utility.CheckFolderPath(folderPath))
-                    {
-                        RestResponse? response = await Call.Get(parameters.Url + parameters.Path);
-
-                        if (response.Content is not null && response.IsSuccessful)
-                        {
-                            ItemApi? jsonItemApi = JsonConvert.DeserializeObject<ItemApi>(response.Content);
-
-                            Converter.ToJson(jsonItemApi?.Results!, folderPath, Choise.ITEMS);
-                            IsLoading = false;
-                        }
-                    }
-                    else
-                    {
-                        IsLoading = false;
-                        Console.WriteLine("The path is invalid!");
-                    }
-                });
-
-
-                loadingThread.Start();
-                requestThread.Start();
-
-                loadingThread.Join();
-                requestThread.Join();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }

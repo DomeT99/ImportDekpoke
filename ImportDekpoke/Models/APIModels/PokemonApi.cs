@@ -2,9 +2,7 @@
 
 namespace ImportDekpoke.Models.APIModels
 {
-    #region ListPokemon
-    public class PokemonApi : Response { }
-    #endregion
+
 
     public class Ability
     {

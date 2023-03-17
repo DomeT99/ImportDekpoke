@@ -1,10 +1,6 @@
 ﻿namespace ImportDekpoke.Models.APIModels
 {
-    #region ListItem
-    public class ItemApi : Response { }
-    #endregion
 
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Attribute
     {
         public string name { get; set; }

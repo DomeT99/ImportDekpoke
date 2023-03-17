@@ -16,13 +16,13 @@ namespace ImportDekpoke
                 switch (userInput.Value)
                 {
                     case Choise.POKEMON:
-                        Request.GetPokemon(userInput.FolderPath!);
+                        Request.GetData(userInput.FolderPath!, "/pokemon/?limit=151", Choise.POKEMON);
                         break;
                     case Choise.MOVES:
-                        Request.GetMoves(userInput.FolderPath!);
+                        Request.GetData(userInput.FolderPath!, "/move/?limit=50", Choise.MOVES);
                         break;
                     case Choise.ITEMS:
-                        Request.GetItems(userInput.FolderPath!);
+                        Request.GetData(userInput.FolderPath!, "/item/?offset=50&limit=50", Choise.ITEMS);
                         break;
                     case Choise.EXIT:
                         return;
