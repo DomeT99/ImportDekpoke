@@ -1,0 +1,6 @@
+Import Dekpoke
+==============
+
+This is the data import software repository via PokeApi REST services (https://pokeapi.co),
+developed in .NET 7 and written with C# language.
+It is a console application that retrieves two input data from the user and through HTTP calls retrieves the necessary data and composes a JSON, which is saved in the folder previously specified by the user.
