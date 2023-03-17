@@ -40,7 +40,10 @@ namespace ImportDekpoke.Utils
 
                     response = await Call.Get(counterPokeApi.Url!);
 
-                    PokemonDetails? pokemonDetails = JsonConvert.DeserializeObject<PokemonDetails>(response.Content!);
+                    PokemonDetails? pokemonDetails = JsonConvert.DeserializeObject<PokemonDetails>(response.Content!, new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
 
 
                     Pokemon pokemon = new()
@@ -115,7 +118,11 @@ namespace ImportDekpoke.Utils
 
                     response = await Call.Get(counterMoveApi.Url!);
 
-                    MoveDetails? moveDetails = JsonConvert.DeserializeObject<MoveDetails>(response.Content!);
+
+                    MoveDetails? moveDetails = JsonConvert.DeserializeObject<MoveDetails>(response.Content!, new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
 
 
                     TypeMove moveType = new()
@@ -132,6 +139,7 @@ namespace ImportDekpoke.Utils
                     };
 
                     moves.Add(newMove);
+
                 }
 
                 Utility.SaveJson(moves, folderPath, "moves");
@@ -155,7 +163,10 @@ namespace ImportDekpoke.Utils
 
                     response = await Call.Get(counterItemApi.Url!);
 
-                    ItemDetails? itemDetails = JsonConvert.DeserializeObject<ItemDetails>(response.Content!);
+                    ItemDetails? itemDetails = JsonConvert.DeserializeObject<ItemDetails>(response.Content!, new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
 
                     Models.Item newItem = new()
                     {

@@ -22,7 +22,7 @@ namespace ImportDekpoke
                         Request.GetData(userInput.FolderPath!, "/move/?limit=50", Choise.MOVES);
                         break;
                     case Choise.ITEMS:
-                        Request.GetData(userInput.FolderPath!, "/item/?offset=50&limit=50", Choise.ITEMS);
+                        Request.GetData(userInput.FolderPath!, "/item/?limit=50", Choise.ITEMS);
                         break;
                     case Choise.EXIT:
                         return;
